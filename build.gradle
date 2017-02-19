@@ -32,10 +32,6 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-jacoco {
-	toolVersion = "0.7.6.201602180812"
-}
-
 jacocoTestCoverageVerification {
 	violationRules {
 		rule {
