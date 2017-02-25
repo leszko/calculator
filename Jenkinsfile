@@ -22,6 +22,12 @@ stage("Code coverage") {
           sh "./gradlew jacocoTestCoverageVerification"
      }
 }
+stage("Static code analysis") {
+     steps {
+          sh "./gradlew checkstyleMain"
+     }
+}
+
 
 
 
