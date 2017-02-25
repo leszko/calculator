@@ -13,8 +13,6 @@ pipeline {
           }
 stage("Code coverage") {
      steps {
-stage("Code coverage") {
-     steps {
           sh "./gradlew jacocoTestReport"
           publishHTML (target: [
                reportDir: 'build/reports/jacoco/test/html',
@@ -24,8 +22,8 @@ stage("Code coverage") {
           sh "/gradlew jacocoTestCoverageVerification"
      }
 }
-     }
-}
+
+
 
       }
 }
