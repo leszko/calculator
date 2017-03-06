@@ -44,7 +44,7 @@ sh "./gradlew build"
 
 stage("Docker build") {
 steps {
-sh "docker build -t leszko/calculator"
+sh "docker build -t leszko/calculator ."
 }
 }
 
