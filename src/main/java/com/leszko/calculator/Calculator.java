@@ -1,5 +1,4 @@
 package com.leszko.calculator;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,3 +7,4 @@ class Calculator {
         return a + b;
     }
 }
+
