@@ -4,7 +4,7 @@ triggers {
      pollSCM('* * * * *')
 }
      stages {
-          stage("Build") {
+          stage("Compile") {
                steps {
                     sh "./gradlew compileJava"
                }
@@ -34,6 +34,18 @@ publishHTML (target: [
      reportName: "Checkstyle Report"
 ])
      }
+}
+
+stage("Build") {
+steps {
+sh "./gradlew build"
+}
+}
+
+stage("Docker build") {
+steps {
+sh "docker build -t leszko/calculator"
+}
 }
 
 
