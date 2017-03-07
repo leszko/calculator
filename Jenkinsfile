@@ -48,6 +48,12 @@ sh "docker build -t leszko/calculator ."
 }
 }
 
+stage("Docker push") {
+      steps {
+            sh "docker push leszko/calculator"
+     }
+}
+
 
 
 
