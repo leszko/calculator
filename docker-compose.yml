@@ -1,0 +1,10 @@
+version: "3"
+services:
+  calculator:
+    build: .
+    links:
+      - redis
+    ports:
+      - 8080
+  redis:
+    image: redis:latest
