@@ -63,23 +63,13 @@ stage("Docker push") {
      }
 }
 
-stage("Deploy to staging") {
-     steps {
-          sh "docker-compose up -d"
-     }
-}
-
-stage("Acceptance tests") {
+stage("Acceptance test") {
     steps {
-          sleep 120
-          sh "./acceptance_test.sh"
+        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml build acceptance_test"
+        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p calculator up -d"
+        sh "docker wait calculator_acceptance_test_1"
+        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml down"
     }
-}
-
-stage("Clean up staging environment") {
-     steps {
-          sh "docker-compose down"
-     }
 }
 
 
