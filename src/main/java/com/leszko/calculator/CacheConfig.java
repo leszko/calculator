@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /** Cache config. */
 @Configuration
-//@EnableCaching
+@EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
     private static final String REDIS_ADDRESS = "redis";
 

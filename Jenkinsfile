@@ -63,16 +63,16 @@ stage("Docker push") {
      }
 }
 
+stage("Deploy to staging") {
+     steps {
+          sh "docker run -d --rm -p 8765:8080 --name calculator leszko/calculator"
+     }
+}
+
 stage("Acceptance tests") {
-
     steps {
-    script {
-                         def image = docker.build('leszko/calculator', '.')
-                         image.withRun('-p 8080:8080') {c ->
-                                 sh "test `curl localhost:8765/sum?a=1\\&b=2` = 3"
-                             }
-
-                    }
+          sleep 120
+      sh "test `curl localhost:8765/sum?a=1\\&b=2` = 3"
     }
 }
 
