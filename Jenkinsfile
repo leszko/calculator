@@ -76,6 +76,12 @@ stage("Acceptance tests") {
     }
 }
 
+stage("Clean up staging environment") {
+    steps {
+      sh "docker stop calculator"
+    }
+}
+
 
 
 
