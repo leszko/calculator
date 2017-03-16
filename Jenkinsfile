@@ -67,7 +67,7 @@ stage("Acceptance test") {
     steps {
         sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml build acceptance_test"
         sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p calculator up -d"
-        sh "docker wait calculator_acceptance_test_1"
+        sh "test `docker wait calculator_acceptance_test_1` -eq 0"
         sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml down"
     }
 }
