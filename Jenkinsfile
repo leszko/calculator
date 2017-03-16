@@ -63,6 +63,28 @@ stage("Docker push") {
      }
 }
 
+stage("Deploy to staging") {
+     steps {
+          sh "docker-compose up -d"
+     }
+}
+
+stage("Acceptance tests") {
+    steps {
+          sleep 120
+          sh "./acceptance_test.sh"
+    }
+}
+
+stage("Clean up staging environment") {
+     steps {
+          sh "docker-compose down"
+     }
+}
+
+
+
+
 
 
 
