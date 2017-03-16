@@ -48,6 +48,15 @@ sh "docker build -t leszko/calculator ."
 }
 }
 
+stage("Docker login") {
+      steps {
+   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'leszko',
+                    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+   sh "docker login --username $USERNAME --password $PASSWORD"
+     }
+}
+}
+
 stage("Docker push") {
       steps {
             sh "docker push leszko/calculator"
