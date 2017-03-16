@@ -1,0 +1,3 @@
+#!/bin/bash
+CALCULATOR_PORT=2345
+echo $CALCULATOR_PORT
