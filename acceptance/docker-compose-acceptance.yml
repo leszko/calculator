@@ -1,0 +1,9 @@
+version: "3"
+services:
+  acceptance_test:
+    build: ./acceptance
+    links:
+      - calculator
+  calculator:
+    ports:
+      - 8080:8080
