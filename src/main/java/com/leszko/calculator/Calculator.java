@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 /** Calculator logic */
 @Service
 public class Calculator {
-    @Cacheable("sum")
+    //@Cacheable("sum")
     public int sum(int a, int b) {
         return a + b;
     }
