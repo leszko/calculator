@@ -68,16 +68,17 @@ stage("Acceptance test") {
         sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml build acceptance_test"
         sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p calculator up -d"
         sh "test `docker wait calculator_acceptance_test_1` -eq 0"
-        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml down"
     }
 }
 
 
 
+      }
 
-
-
-
+      post {
+      always {
+        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml down"
+      }
       }
 }
 
