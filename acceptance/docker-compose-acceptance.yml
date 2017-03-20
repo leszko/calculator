@@ -4,3 +4,6 @@ services:
     build: ./acceptance
     links:
       - calculator
+  calculator:
+    ports:
+      - 8080:8080
