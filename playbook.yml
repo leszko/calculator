@@ -1,0 +1,31 @@
+---
+- hosts: web1
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: ensure Java Runtime Environment is installed
+    apt: 
+      name: default-jre 
+      state: present
+  - name: Create directory for Calculator application
+    file: 
+      path: /var/calculator
+      state: directory
+  - name: copy Calculator application
+    copy: 
+      src: build/libs/calculator-0.0.1-SNAPSHOT.jar
+      dest: /var/calculator/calculator.jar
+    notify:
+    - restart calculator
+  - name: deploy Calculator as a Unix service
+    file:
+      path: /etc/init.d/calculator
+      state: link
+      src: /var/calculator/calculator.jar
+  handlers:
+  - name: restart calculator
+    service:
+      name: calculator
+      enabled: yes
+      state: restarted
+
