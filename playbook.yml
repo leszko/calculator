@@ -22,7 +22,6 @@
       name: redis-server
       state: restarted
 
----
 - hosts: web2
   become: yes
   become_method: sudo
@@ -47,7 +46,7 @@
       state: link
       src: /var/calculator/calculator.jar
   handlers:
-  - name: restart calculator
+  - name: restart Calculator
     service:
       name: calculator
       enabled: yes

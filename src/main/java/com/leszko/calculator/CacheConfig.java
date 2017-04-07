@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
-    private final static String REDIS_HOST = "192.168.0.241;
+    private final static String REDIS_HOST = "192.168.0.241";
 
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
