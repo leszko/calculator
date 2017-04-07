@@ -3,54 +3,41 @@
   become: yes
   become_method: sudo
   tasks:
-  - name: install Redis
-    apt:
-      name: redis-server
+  - name: add docker apt keys
+    apt_key: 
+      keyserver: hkp://p80.pool.sks-keyservers.net:80
+      id: 58118E89F3A912897C070ADBF76221572C52609D
+  - name: update apt
+    apt_repository: 
+      repo: deb https://apt.dockerproject.org/repo ubuntu-xenial main
       state: present
-  - name: start Redis
-    service:
-      name: redis-server
-      state: started
-  - name: copy Redis configuration
-    copy:
-      src: redis.conf
-      dest: /etc/redis/redis.conf
-    notify: restart Redis
-  handlers:
-  - name: restart Redis
-    service:
-      name: redis-server
-      state: restarted
-
-- hosts: web2
-  become: yes
-  become_method: sudo
-  tasks:
-  - name: ensure Java Runtime Environment is installed
-    apt:
-      name: default-jre
+  - name: install Docker
+    apt: 
+      name: docker-engine
+      update_cache: yes
       state: present
-  - name: create directory for Calculator
-    file:
-      path: /var/calculator
-      state: directory
-  - name: configure Calculator as a service
-    file:
-      path: /etc/init.d/calculator
-      state: link
-      force: yes
-      src: /var/calculator/calculator.jar
-  - name: copy Calculator
+  - name: add ubuntu to docker group
+    user:
+      name: ubuntu
+      groups: docker
+      append: yes
+  - name: install python-pip
+    apt:
+      name: python-pip
+      state: present
+  - name: install docker-py
+    pip:
+      name: docker-py
+  - name: install Docker Compose
+    pip:
+      name: docker-compose
+      version: 1.9.0
+  - name: copy docker-compose.yml
     copy:
-      src: build/libs/calculator-0.0.1-SNAPSHOT.jar
-      dest: /var/calculator/calculator.jar
-      mode: a+x
-    notify:
-    - restart Calculator
-  handlers:
-  - name: restart Calculator
-    service: 
-      name: calculator
-      enabled: yes
-      state: restarted
+      src: ./docker-compose.yml
+      dest: ./docker-compose.yml
+  - name: run docker-compose
+    docker_service:
+      project_src: .
+      state: present
 
