@@ -30,24 +30,26 @@
     apt:
       name: default-jre
       state: present
-  - name: Create directory for Calculator
+  - name: create directory for Calculator
     file:
       path: /var/calculator
       state: directory
+  - name: configure Calculator as a service
+    file:
+      path: /etc/init.d/calculator
+      state: link
+      force: yes
+      src: /var/calculator/calculator.jar
   - name: copy Calculator
     copy:
       src: build/libs/calculator-0.0.1-SNAPSHOT.jar
       dest: /var/calculator/calculator.jar
+      mode: a+x
     notify:
     - restart Calculator
-  - name: deploy Calculator as a service
-    file:
-      path: /etc/init.d/calculator
-      state: link
-      src: /var/calculator/calculator.jar
   handlers:
   - name: restart Calculator
-    service:
+    service: 
       name: calculator
       enabled: yes
       state: restarted
