@@ -1,5 +1,4 @@
 package com.leszko.calculator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,13 +13,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
-    @Value("${redis_host}")
-    private String redisHost;
+    private final static String REDIS_HOST = "192.168.0.241;
 
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
         JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
-        redisConnectionFactory.setHostName(redisHost);
+        redisConnectionFactory.setHostName(REDIS_HOST);
         redisConnectionFactory.setPort(6379);
         return redisConnectionFactory;
     }
