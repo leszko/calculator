@@ -40,4 +40,4 @@
     docker_service:
       project_src: .
       state: present
-
+      restarted: yes
