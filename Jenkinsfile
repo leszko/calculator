@@ -72,7 +72,7 @@ stage("Deploy to staging") {
 
 stage("Acceptance test") {
     steps {
-	sh "./acceptance_test.sh"
+	sh "./acceptance_test.sh 192.168.0.241"
     }
 }
 
