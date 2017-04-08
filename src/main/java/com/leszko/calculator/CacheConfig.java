@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
-/** Cache config. */
+/** Cache config with Redis. */
 @Configuration
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
