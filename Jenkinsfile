@@ -65,7 +65,7 @@ stage("Docker push") {
 
 stage("Deploy to staging") {
     steps {
-        sh "ansible-playbook playbook.yml -i ansible/staging"
+        sh "ansible-playbook playbook.yml -i inventories/staging"
     }
 }
 
