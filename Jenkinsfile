@@ -63,22 +63,23 @@ stage("Docker push") {
      }
 }
 
+stage("Deploy to staging") {
+    steps {
+        sh "ansible-playbook playbook.yml -i ansible/staging"
+    }
+}
+
+
 stage("Acceptance test") {
     steps {
-        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml build acceptance_test"
-        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p calculator up -d"
-        sh "test `docker wait calculator_acceptance_test_1` -eq 0"
+	echo "Acceptance test"
+	// acceptance test
     }
 }
 
 
 
-      }
 
-      post {
-      always {
-        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml down"
-      }
       }
 }
 
