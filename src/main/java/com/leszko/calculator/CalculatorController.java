@@ -11,7 +11,7 @@ class CalculatorController {
 
     @RequestMapping("/sum")
     String sum(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
-        return String.valueOf(calculator.sum(a + 2, b));
+        return String.valueOf(calculator.sum(a, b));
     }
 }
 
