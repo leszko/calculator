@@ -72,8 +72,7 @@ stage("Deploy to staging") {
 
 stage("Acceptance test") {
     steps {
-	echo "Acceptance test"
-	// acceptance test
+	sh "./acceptance_test.sh"
     }
 }
 
