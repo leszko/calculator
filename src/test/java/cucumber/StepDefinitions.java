@@ -1,4 +1,4 @@
-package acceptance;
+package cucumber;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static org.junit.Assert.assertEquals;
 
-/** Steps definitions for calculator.feature */
+/** Steps definitions for calculator.acceptance */
 public class StepDefinitions {
     private String server = System.getProperty("calculator.url");
 

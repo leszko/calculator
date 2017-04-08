@@ -53,8 +53,14 @@ task acceptanceTest(type: Test) {
 	systemProperties System.getProperties()
 }
 
+task smokeTest(type: Test) {
+	include '**/smoke/**'
+	systemProperties System.getProperties()
+}
+
 test {
 	exclude '**/acceptance/**'
+	exclude '**/smoke/**'
 }
 
 bootRepackage {
