@@ -77,6 +77,20 @@ stage("Acceptance test") {
     }
 }
 
+stage("Release") {
+    steps {
+        sh "ansible-playbook playbook.yml -i inventories/production"
+        sleep 60
+    }
+}
+
+
+stage("Acceptance test") {
+    steps {
+	sh "./smoke_test.sh 192.168.0.242"
+    }
+}
+
 
 
 
