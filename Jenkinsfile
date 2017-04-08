@@ -85,7 +85,7 @@ stage("Release") {
 }
 
 
-stage("Acceptance test") {
+stage("Smoke test") {
     steps {
 	sh "./smoke_test.sh 192.168.0.242"
     }
