@@ -73,7 +73,7 @@ stage("Deploy to staging") {
 
 stage("Acceptance test") {
     steps {
-	sh "./acceptance_test.sh 192.168.0.241"
+	sh "./acceptance_test.sh 192.168.0.166"
     }
 }
 
@@ -87,7 +87,7 @@ stage("Release") {
 
 stage("Smoke test") {
     steps {
-	sh "./smoke_test.sh 192.168.0.242"
+	sh "./smoke_test.sh 192.168.0.115"
     }
 }
 
