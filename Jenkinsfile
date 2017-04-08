@@ -66,6 +66,7 @@ stage("Docker push") {
 stage("Deploy to staging") {
     steps {
         sh "ansible-playbook playbook.yml -i inventories/staging"
+        sleep 60
     }
 }
 
