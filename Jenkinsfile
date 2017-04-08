@@ -65,7 +65,7 @@ stage("Docker push") {
 
 stage("Deploy to staging") {
     steps {
-        sh "ansible-playbook playbook.yml -i inventories/staging"
+        sh "ansible-playbook playbook.yml -i inventory/staging"
         sleep 60
     }
 }
@@ -79,7 +79,7 @@ stage("Acceptance test") {
 
 stage("Release") {
     steps {
-        sh "ansible-playbook playbook.yml -i inventories/production"
+        sh "ansible-playbook playbook.yml -i inventory/production"
         sleep 60
     }
 }
