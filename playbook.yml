@@ -40,4 +40,5 @@
     docker_service:
       project_src: .
       state: present
+      pull: yes
       restarted: yes
