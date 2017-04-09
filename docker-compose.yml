@@ -1,7 +1,7 @@
 version: "2"
 services:
   calculator:
-    image: leszko/calculator:latest
+    image: leszko/calculator:${BUILD_TIMESTAMP}
     links:
       - redis
     ports:
