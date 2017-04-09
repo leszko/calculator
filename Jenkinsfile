@@ -44,7 +44,7 @@ sh "./gradlew build"
 
 stage("Docker build") {
 steps {
-sh "docker build -t leszko/calculator ."
+sh "docker build -t leszko/calculator:${BUILD_TIMESTAMP} ."
 }
 }
 
@@ -59,7 +59,7 @@ stage("Docker login") {
 
 stage("Docker push") {
       steps {
-            sh "docker push leszko/calculator"
+            sh "docker push leszko/calculator:${BUILD_TIMESTAMP}"
      }
 }
 
