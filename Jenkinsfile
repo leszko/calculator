@@ -78,6 +78,8 @@ pipeline {
 	sh "./acceptance_test.sh 192.168.0.166"
       }
     }
+	  
+    // Performance test stages
 
     stage("Release") {
       steps {
