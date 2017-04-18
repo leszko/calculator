@@ -28,13 +28,7 @@ pipeline {
         sh "./gradlew jacocoTestCoverageVerification"
       }
     }
-	   agent {
- label ‘’
- }
- stages {
- stage(‘Build’) {
- steps{
- sh ‘m
+
     stage("Static code analysis") {
       steps {
         sh "./gradlew checkstyleMain"
