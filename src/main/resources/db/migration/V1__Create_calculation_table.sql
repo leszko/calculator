@@ -3,4 +3,5 @@ create table CALCULATION (
     A varchar(100) not null,
     B varchar(100) not null,
     RESULT varchar(100) not null,
+    primary key (ID)
 );
