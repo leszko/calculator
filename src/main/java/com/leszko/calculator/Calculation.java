@@ -13,15 +13,19 @@ public class Calculation {
     private Integer id;
     private String a;
     private String b;
-    private String result;
+    private String sum;
     private Timestamp createdAt;
 
     protected Calculation() {}
 
-    public Calculation(String a, String b, String result, Timestamp createdAt) {
+    public Calculation(String a, String b, String sum, Timestamp createdAt) {
         this.a = a;
         this.b = b;
-        this.result = result;
+        this.sum = sum;
         this.createdAt = createdAt;
+    }
+
+    public String getSum() {
+        return sum;
     }
 }
