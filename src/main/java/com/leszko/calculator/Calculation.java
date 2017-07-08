@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 
+/**
+ * Calculation entity.
+ */
 @Entity
 public class Calculation {
     @Id
