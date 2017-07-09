@@ -2,8 +2,6 @@ version: "2"
 services:
   calculator:
     image: leszko/calculator:latest
-    links:
-      - redis
     ports:
       - 8080
   redis:
