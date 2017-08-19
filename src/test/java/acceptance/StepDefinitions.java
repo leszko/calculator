@@ -1,4 +1,4 @@
-package cucumber;
+package acceptance;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
