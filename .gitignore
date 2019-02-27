@@ -1,3 +1,4 @@
+HELP.md
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -9,12 +10,18 @@
 .project
 .settings
 .springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+/out/
 
-# Ansible
-playbook.retry
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
