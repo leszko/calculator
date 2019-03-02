@@ -5,6 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 apply plugin: "jacoco"
+apply plugin: 'checkstyle'
 
 group = 'com.leszko'
 version = '0.0.1-SNAPSHOT'
