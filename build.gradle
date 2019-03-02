@@ -29,3 +29,7 @@ jacocoTestCoverageVerification {
           }
      }
 }
+
+checkstyle {
+     checkstyleTest.enabled = false
+}
