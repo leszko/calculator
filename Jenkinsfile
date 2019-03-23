@@ -51,6 +51,7 @@ pipeline {
                     sh "docker push leszko/calculator"
                }
           }
+          
           stage("Deploy to staging") {
                steps {
                     sh "docker run -d --rm -p 8765:8080 --name calculator leszko/calculator"
@@ -60,7 +61,7 @@ pipeline {
           stage("Acceptance test") {
                steps {
                     sleep 60
-                    sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
+                    sh "./gradlew acceptanceTest -Dcalculator.url=http://localhost:8765"
                }
           }
      }
