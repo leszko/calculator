@@ -33,7 +33,7 @@ pipeline {
 
           stage("Docker build") {
                steps {
-                    sh "docker build -t leszko/calculator ."
+                    sh "docker build -t leszko/calculator:${BUILD_TIMESTAMP} ."
                }
           }
 
@@ -48,26 +48,39 @@ pipeline {
 
           stage("Docker push") {
                steps {
-                    sh "docker push leszko/calculator"
+                    sh "docker push leszko/calculator:${BUILD_TIMESTAMP}"
                }
           }
           
           stage("Deploy to staging") {
                steps {
-                    sh "docker run -d --rm -p 8765:8080 --name calculator leszko/calculator"
+                    sh "kubectl config use-context staging"
+                    sh "kubectl apply -f hazelcast.yaml"
+                    sh "sed  's/{{VERSION}}/${BUILD_TIMESTAMP}/g' calculator.yaml | kubectl apply -f -"
                }
           }
 
           stage("Acceptance test") {
                steps {
                     sleep 60
-                    sh "./gradlew acceptanceTest -Dcalculator.url=http://localhost:8765"
+                    sh 'export NODE_IP=$(kubectl get nodes -o jsonpath=\'{ $.items[0].status.addresses[?(@.type=="ExternalIP")].address }\')'
+                    sh 'export NODE_PORT=$(kubectl get svc calculator-service -o=jsonpath=\'{.spec.ports[0].nodePort}\')'
+                    sh './gradlew acceptanceTest -Dcalculator.url=http://$NODE_IP:$NODE_PORT'
                }
           }
-     }
-     post {
-          always {
-               sh "docker stop calculator"
+
+          stage("Release") {
+               steps {
+                    sh "kubectl config use-context production"
+                    sh "kubectl apply -f hazelcast.yaml"
+                    sh "sed  's/{{VERSION}}/${BUILD_TIMESTAMP}/g' calculator.yaml | kubectl apply -f -"
+               }
+          }
+          stage("Smoke test") {
+              steps {
+                  sleep 60
+                  sh "./smoke_test.sh"
+              }
           }
      }
 }
