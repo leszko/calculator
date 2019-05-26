@@ -63,9 +63,7 @@ pipeline {
           stage("Acceptance test") {
                steps {
                     sleep 60
-                    sh 'export NODE_IP=$(kubectl get nodes -o jsonpath=\'{ $.items[0].status.addresses[?(@.type=="ExternalIP")].address }\')'
-                    sh 'export NODE_PORT=$(kubectl get svc calculator-service -o=jsonpath=\'{.spec.ports[0].nodePort}\')'
-                    sh './gradlew acceptanceTest -Dcalculator.url=http://$NODE_IP:$NODE_PORT'
+                    sh "./acceptance-test.sh"
                }
           }
 
