@@ -51,12 +51,18 @@ pipeline {
                     sh "docker push leszko/calculator:${BUILD_TIMESTAMP}"
                }
           }
+
+          stage("Update version") {
+               steps {
+                    sh "sed  -i 's/{{VERSION}}/${BUILD_TIMESTAMP}/g' calculator.yaml"
+               }
+          }
           
           stage("Deploy to staging") {
                steps {
                     sh "kubectl config use-context staging"
                     sh "kubectl apply -f hazelcast.yaml"
-                    sh "sed  's/{{VERSION}}/${BUILD_TIMESTAMP}/g' calculator.yaml | kubectl apply -f -"
+                    sh "kubectl apply -f calculator.yaml"
                }
           }
 
@@ -71,7 +77,7 @@ pipeline {
                steps {
                     sh "kubectl config use-context production"
                     sh "kubectl apply -f hazelcast.yaml"
-                    sh "sed  's/{{VERSION}}/${BUILD_TIMESTAMP}/g' calculator.yaml | kubectl apply -f -"
+                    sh "kubectl apply -f calculator.yaml"
                }
           }
           stage("Smoke test") {
