@@ -20,6 +20,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+jacoco {
+    toolVersion = "0.8.6"
+}
+
 jacocoTestCoverageVerification {
      violationRules {
           rule {
