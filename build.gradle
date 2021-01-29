@@ -23,6 +23,10 @@ dependencies {
      testImplementation("io.cucumber:cucumber-junit:4.2.6")
 }
 
+jacoco {
+    toolVersion = "0.8.6"
+}
+
 jacocoTestCoverageVerification {
      violationRules {
           rule {
