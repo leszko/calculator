@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: calculator
-        image: leszko/calculator:{{VERSION}}
+        image: leszko/calculator:test-amd
         ports:
         - containerPort: 8080
