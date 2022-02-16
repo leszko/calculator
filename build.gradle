@@ -34,7 +34,6 @@ tasks.register('smokeTest', Test) {
 } 
 
 test { 
-	useJUnitPlatform() 
 	exclude '**/acceptance/**'
 	exclude '**/smoke/**'
 }    
