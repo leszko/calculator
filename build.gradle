@@ -28,9 +28,15 @@ tasks.register('acceptanceTest', Test) {
 	systemProperties System.getProperties() 
 } 
 
+tasks.register('smokeTest', Test) { 
+	include '**/smoke/**' 
+	systemProperties System.getProperties() 
+} 
+
 test { 
 	useJUnitPlatform() 
-	exclude '**/acceptance/**' 
+	exclude '**/acceptance/**'
+	exclude '**/smoke/**'
 }    
 
 jacocoTestCoverageVerification {
