@@ -36,12 +36,7 @@ pipeline {
                     sh "docker build -t leszko/calculator ." 
                } 
           }
-          // Requires docker login to work
-          // stage("Docker push") { 
-          //      steps { 
-          //           sh "docker push leszko/calculator" 
-          //      } 
-          // }
+
           stage("Deploy to staging") { 
                steps { 
                     sh "docker run -d --rm -p 8765:8080 --name calculator leszko/calculator" 
